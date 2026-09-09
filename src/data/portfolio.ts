@@ -78,9 +78,9 @@ export const portfolio = {
     ],
   },
   stats: [
-    { value: '2+', label: 'Years Experience', tone: 'green' as const },
-    { value: '20+', label: 'Projects Completed', tone: 'purple' as const },
-    { value: '10+', label: 'Happy Clients', tone: 'gold' as const },
+    { value: '3+', label: 'Years Experience', tone: 'green' as const },
+    { value: '25+', label: 'Projects Completed', tone: 'purple' as const },
+    { value: '4500+', label: 'Happy Users', tone: 'gold' as const },
     { value: '2', label: 'Countries Served', tone: 'blue' as const },
   ],
   skills: [
