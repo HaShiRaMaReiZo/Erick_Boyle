@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { Menu } from '@lucide/vue'
 import { portfolio } from '@/data/portfolio'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
@@ -18,47 +18,78 @@ const activeId = ref('home')
 const sidebarOpen = ref(false)
 const mainEl = ref<HTMLElement | null>(null)
 
-let observer: IntersectionObserver | null = null
+let rafId = 0
+let scrollingProgrammatically = false
+let unlockTimer: ReturnType<typeof setTimeout> | null = null
+
+function isDesktopScroll() {
+  return window.matchMedia('(min-width: 1024px)').matches
+}
+
+function getScrollRoot() {
+  return isDesktopScroll() ? mainEl.value : null
+}
+
+function updateActiveSection() {
+  const root = getScrollRoot()
+  const marker = root
+    ? root.getBoundingClientRect().top + Math.min(140, root.clientHeight * 0.25)
+    : 110
+
+  let current = portfolio.nav[0]?.id ?? 'home'
+  for (const { id } of portfolio.nav) {
+    const el = document.getElementById(id)
+    if (!el) continue
+    if (el.getBoundingClientRect().top <= marker) current = id
+  }
+
+  if (!scrollingProgrammatically) {
+    activeId.value = current
+  }
+}
+
+function onScroll() {
+  if (rafId) cancelAnimationFrame(rafId)
+  rafId = requestAnimationFrame(updateActiveSection)
+}
 
 function navigate(id: string) {
   const el = document.getElementById(id)
   if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
   activeId.value = id
+  scrollingProgrammatically = true
+  if (unlockTimer) clearTimeout(unlockTimer)
+
+  const root = getScrollRoot()
+  if (root) {
+    const nextTop = root.scrollTop + (el.getBoundingClientRect().top - root.getBoundingClientRect().top)
+    root.scrollTo({ top: nextTop, behavior: 'smooth' })
+  } else {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  unlockTimer = setTimeout(() => {
+    scrollingProgrammatically = false
+    updateActiveSection()
+  }, 700)
 }
 
-function setupObserver() {
-  const ids = portfolio.nav.map((n) => n.id)
-  const useMainAsRoot = window.matchMedia('(min-width: 1024px)').matches
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-      if (visible[0]?.target.id) {
-        activeId.value = visible[0].target.id
-      }
-    },
-    {
-      root: useMainAsRoot ? mainEl.value : null,
-      rootMargin: '-20% 0px -55% 0px',
-      threshold: [0.1, 0.25, 0.5],
-    },
-  )
-
-  ids.forEach((id) => {
-    const el = document.getElementById(id)
-    if (el) observer?.observe(el)
-  })
-}
-
-onMounted(() => {
-  setupObserver()
+onMounted(async () => {
+  await nextTick()
+  const root = mainEl.value
+  root?.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll, { passive: true })
+  updateActiveSection()
 })
 
 onUnmounted(() => {
-  observer?.disconnect()
+  if (rafId) cancelAnimationFrame(rafId)
+  if (unlockTimer) clearTimeout(unlockTimer)
+  mainEl.value?.removeEventListener('scroll', onScroll)
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', onScroll)
 })
 </script>
 

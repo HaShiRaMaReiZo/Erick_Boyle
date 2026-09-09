@@ -73,21 +73,11 @@ function onNav(id: string) {
       <X :size="20" />
     </button>
 
-    <div class="sidebar__brand">
-      <div class="sidebar__logo" :aria-label="portfolio.initials + ' logo'">
-        <span
-          v-for="(char, i) in portfolio.initials"
-          :key="i"
-          class="sidebar__logo-char"
-          :class="{ 'sidebar__logo-char--skew': i === 0 }"
-        >{{ char }}</span>
-      </div>
-    </div>
-
     <div class="sidebar__avatar-wrap">
       <div class="sidebar__avatar">
         <img :src="portfolio.avatar" :alt="portfolio.name" @error="onAvatarError" />
       </div>
+      <p class="sidebar__name">{{ portfolio.name }}</p>
     </div>
 
     <nav class="sidebar__nav">
@@ -174,41 +164,23 @@ function onNav(id: string) {
   color: var(--text);
 }
 
-.sidebar__brand {
-  margin-bottom: 1.1rem;
-}
-
-.sidebar__logo {
-  display: flex;
-  align-items: baseline;
-  gap: 0.02em;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.55rem;
-  letter-spacing: -0.06em;
-  line-height: 1;
-  filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
-}
-
-.sidebar__logo-char {
-  background: linear-gradient(180deg, #d946ef 0%, #a855f7 42%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-.sidebar__logo-char--skew {
-  transform: skewX(-8deg);
-}
-
-.sidebar__logo-char:not(.sidebar__logo-char--skew) {
-  transform: skewX(-4deg);
-  margin-left: -0.05em;
-}
-
 .sidebar__avatar-wrap {
-  margin-bottom: 1.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.35rem;
+}
+
+.sidebar__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--text);
+  line-height: 1.2;
 }
 
 .sidebar__avatar {
