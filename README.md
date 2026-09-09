@@ -1,11 +1,13 @@
 # Erick Boyle — Portfolio
 
-Dark neon glassmorphism portfolio built with **Vue 3**, **Vite**, **TypeScript**, and **Tailwind CSS**. Design matches the sidebar + hero video layout; content is based on [erickboyle.website](https://erickboyle.website/).
+Dark neon glassmorphism portfolio built with **Vue 3**, **Vite**, **TypeScript**, and **Tailwind CSS**.
 
 ## Quick start
 
 ```bash
 npm install
+cp .env.example .env.local
+# Fill VITE_EMAILJS_* values (see EmailJS section below)
 npm run dev
 ```
 
@@ -16,29 +18,40 @@ npm run build
 npm run preview
 ```
 
+## Contact form (EmailJS)
+
+The contact form sends mail through [EmailJS](https://www.emailjs.com/) (same approach as `portfolio-new`).
+
+1. Connect a Gmail service in EmailJS that delivers to **`zwemhanhtet2004@gmail.com`**.
+2. Template variables must match: `{{name}}`, `{{email}}`, `{{title}}`, `{{message}}`, `{{time}}`.
+3. Set **Reply To** to `{{email}}`.
+4. Add env vars (Vite prefix):
+
+```env
+VITE_EMAILJS_SERVICE_ID=...
+VITE_EMAILJS_TEMPLATE_ID=...
+VITE_EMAILJS_PUBLIC_KEY=...
+```
+
+Local: `.env.local` (gitignored).  
+Production: set the same three keys in the Vercel project **Environment Variables**.
+
+## Deploy on Vercel
+
+1. Push this repo to GitHub.
+2. [vercel.com/new](https://vercel.com/new) → import the repo.
+3. Framework preset: **Vite** (or leave auto-detect). Build: `npm run build`, Output: `dist`.
+4. Add the three `VITE_EMAILJS_*` environment variables → Redeploy.
+5. Optional: upload `public/cv.pdf` before deploy so **Download CV** works.
+
+`vercel.json` is included for SPA rewrites.
+
 ## Assets
 
 | File | Purpose |
 |------|---------|
-| `public/videos/hero-loop.mp4` | Hero looping video (already copied) |
-| `public/images/hero-frame.jpg` | First-frame fallback / reference |
+| `public/videos/hero-loop.orig.mp4` | Hero looping video |
 | `public/images/avatar.jpg` | Sidebar profile photo |
-| `public/images/projects/*.jpg` | Project card images |
-| `public/cv.pdf` | Download CV button target |
+| `public/cv.pdf` | Download CV target (add this file) |
 
-The page uses a shared **space backdrop** (twinkling stars, nebula, floating rocks) so the video’s deep navy / purple / cyan scene blends with the rest of the UI.
-
-Edit all copy, links, stats, and projects in [`src/data/portfolio.ts`](src/data/portfolio.ts).
-
-## Project structure
-
-- `src/components/layout/AppSidebar.vue` — fixed nav + socials
-- `src/components/hero/` — hero copy + masked looping video
-- `src/components/stats/StatsBar.vue` — metrics row
-- `src/components/projects/` — featured + project cards
-- `src/components/sections/` — About, Skills, Projects, Experience, Testimonials, Blog, Contact
-
-## Notes
-
-- Contact form opens the user’s email client via `mailto:` (no backend).
-- Hero video uses `autoplay`, `muted`, `loop`, and `playsinline`, with a soft radial mask so it blends into the dark background.
+Edit copy, links, stats, and projects in [`src/data/portfolio.ts`](src/data/portfolio.ts).

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { Mail, Phone, MapPin, Send } from '@lucide/vue'
+import emailjs from '@emailjs/browser'
+import { Mail, Phone, MapPin, Send, Loader2 } from '@lucide/vue'
 import { portfolio } from '@/data/portfolio'
 
 const form = reactive({
@@ -10,15 +11,56 @@ const form = reactive({
   message: '',
 })
 
-const submitted = ref(false)
+const isSubmitting = ref(false)
+const status = ref<'idle' | 'success' | 'error' | 'config'>('idle')
+const errorMessage = ref('')
 
-function onSubmit() {
-  const subject = encodeURIComponent(form.subject || 'Portfolio inquiry')
-  const body = encodeURIComponent(
-    `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`,
-  )
-  window.location.href = `mailto:${portfolio.contact.email}?subject=${subject}&body=${body}`
-  submitted.value = true
+async function onSubmit() {
+  isSubmitting.value = true
+  status.value = 'idle'
+  errorMessage.value = ''
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+  if (
+    !serviceId ||
+    !templateId ||
+    !publicKey ||
+    serviceId === 'YOUR_SERVICE_ID' ||
+    templateId === 'YOUR_TEMPLATE_ID' ||
+    publicKey === 'YOUR_PUBLIC_KEY'
+  ) {
+    isSubmitting.value = false
+    status.value = 'config'
+    errorMessage.value =
+      'Email is not configured. Add VITE_EMAILJS_* keys in .env.local (or Vercel env vars).'
+    return
+  }
+
+  try {
+    emailjs.init(publicKey)
+    await emailjs.send(serviceId, templateId, {
+      name: form.name || 'Anonymous',
+      email: form.email,
+      title: form.subject || 'Contact Form Submission',
+      message: form.message,
+      time: new Date().toLocaleString(),
+    })
+
+    status.value = 'success'
+    form.name = ''
+    form.email = ''
+    form.subject = ''
+    form.message = ''
+  } catch (error) {
+    console.error('EmailJS Error:', error)
+    status.value = 'error'
+    errorMessage.value = 'Something went wrong. Please try again or email me directly.'
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -35,31 +77,67 @@ function onSubmit() {
 
         <label>
           <span>Name *</span>
-          <input v-model="form.name" type="text" required placeholder="Your name" />
+          <input
+            v-model="form.name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+            :disabled="isSubmitting"
+          />
         </label>
         <label>
           <span>Email *</span>
-          <input v-model="form.email" type="email" required placeholder="you@email.com" />
+          <input
+            v-model="form.email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="you@email.com"
+            :disabled="isSubmitting"
+          />
         </label>
         <label>
           <span>Subject *</span>
-          <input v-model="form.subject" type="text" required placeholder="Project idea" />
+          <input
+            v-model="form.subject"
+            name="subject"
+            type="text"
+            required
+            placeholder="Project idea"
+            :disabled="isSubmitting"
+          />
         </label>
         <label>
           <span>Message *</span>
           <textarea
             v-model="form.message"
+            name="message"
             required
             rows="5"
             placeholder="Tell me about your project..."
+            :disabled="isSubmitting"
           />
         </label>
 
-        <button type="submit" class="btn-primary contact__submit">
-          <Send :size="16" />
-          Send Message
+        <button type="submit" class="btn-primary contact__submit" :disabled="isSubmitting">
+          <Loader2 v-if="isSubmitting" :size="16" class="contact__spin" />
+          <Send v-else :size="16" />
+          {{ isSubmitting ? 'Sending…' : 'Send Message' }}
         </button>
-        <p v-if="submitted" class="contact__hint">Opening your email client…</p>
+
+        <p v-if="status === 'success'" class="contact__hint contact__hint--ok" role="status">
+          Message sent. I'll get back to you soon.
+        </p>
+        <p
+          v-else-if="status === 'error' || status === 'config'"
+          class="contact__hint contact__hint--err"
+          role="alert"
+        >
+          {{ errorMessage }}
+        </p>
       </form>
 
       <div class="contact__aside" v-reveal="'right'" data-reveal-delay="2">
@@ -152,8 +230,16 @@ function onSubmit() {
   color: var(--text);
   font: inherit;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   resize: vertical;
+}
+
+.contact__form input:disabled,
+.contact__form textarea:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .contact__form input:focus,
@@ -167,9 +253,32 @@ function onSubmit() {
   margin-top: 0.35rem;
 }
 
+.contact__submit:disabled {
+  opacity: 0.75;
+  cursor: wait;
+  transform: none;
+}
+
+.contact__spin {
+  animation: contact-spin 0.9s linear infinite;
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .contact__hint {
-  color: var(--text-dim);
   font-size: 0.85rem;
+}
+
+.contact__hint--ok {
+  color: #4ade80;
+}
+
+.contact__hint--err {
+  color: #f87171;
 }
 
 .contact__aside {
