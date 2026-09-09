@@ -12,7 +12,6 @@ import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue'
-import BlogSection from '@/components/sections/BlogSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 
 const activeId = ref('home')
@@ -104,7 +103,6 @@ onUnmounted(() => {
       <ProjectsSection />
       <ExperienceSection />
       <TestimonialsSection />
-      <BlogSection />
       <ContactSection />
     </main>
   </div>

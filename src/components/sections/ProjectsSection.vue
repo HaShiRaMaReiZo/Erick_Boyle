@@ -1,20 +1,30 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { portfolio } from '@/data/portfolio'
+import { portfolio, type Project } from '@/data/portfolio'
 import ProjectCard from '@/components/projects/ProjectCard.vue'
+import ProjectDetailModal from '@/components/projects/ProjectDetailModal.vue'
 
 const filters = ['All Projects', 'Full Stack', 'Web Development', 'Mobile Apps'] as const
 const active = ref<(typeof filters)[number]>('All Projects')
+const selected = ref<Project | null>(null)
 
 const filtered = computed(() => {
   if (active.value === 'All Projects') return portfolio.projects
   return portfolio.projects.filter((p) => p.category === active.value)
 })
+
+function openProject(project: Project) {
+  selected.value = project
+}
+
+function closeProject() {
+  selected.value = null
+}
 </script>
 
 <template>
   <section id="projects" class="section-pad projects">
-    <div class="projects__intro">
+    <div class="projects__intro" v-reveal="'fade'">
       <h2>My Projects</h2>
       <p>
         Here are some of my recent works. A lot of projects are not listed here because they are
@@ -22,7 +32,7 @@ const filtered = computed(() => {
       </p>
     </div>
 
-    <div class="projects__filters">
+    <div class="projects__filters" v-reveal="'up'">
       <button
         v-for="filter in filters"
         :key="filter"
@@ -36,8 +46,17 @@ const filtered = computed(() => {
     </div>
 
     <div class="projects__grid">
-      <ProjectCard v-for="project in filtered" :key="project.id" :project="project" />
+      <div
+        v-for="(project, i) in filtered"
+        :key="project.id"
+        v-reveal="'scale'"
+        :data-reveal-delay="String((i % 3) + 1)"
+      >
+        <ProjectCard :project="project" @open="openProject" />
+      </div>
     </div>
+
+    <ProjectDetailModal :project="selected" @close="closeProject" />
   </section>
 </template>
 

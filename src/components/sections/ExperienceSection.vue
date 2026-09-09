@@ -4,16 +4,18 @@ import { portfolio } from '@/data/portfolio'
 
 <template>
   <section id="experience" class="section-pad experience">
-    <div class="experience__intro">
+    <div class="experience__intro" v-reveal="'fade'">
       <h2>Experience</h2>
       <p>A snapshot of roles and work that shaped how I build products.</p>
     </div>
 
     <div class="experience__timeline">
       <article
-        v-for="item in portfolio.experience"
+        v-for="(item, i) in portfolio.experience"
         :key="item.role + item.period"
         class="experience__item glass"
+        v-reveal="'left'"
+        :data-reveal-delay="String(i + 1)"
       >
         <div class="experience__period">{{ item.period }}</div>
         <h3>{{ item.role }}</h3>

@@ -10,45 +10,41 @@ const emit = defineEmits<{
 
 <template>
   <section id="home" class="hero">
-    <a href="#contact" class="hero__lets-talk float-y">
-      <span class="pulse-dot" aria-hidden="true" />
-      Let's Talk
-    </a>
-
     <div class="hero__stage">
       <div class="hero__copy">
-        <div class="hero__badge">
+        <div class="hero__badge hero-enter">
           <Zap :size="14" class="hero__badge-icon" />
           <span>{{ portfolio.role.toUpperCase() }}</span>
         </div>
 
-        <h1 class="hero__title">
+        <h1 class="hero__title hero-enter hero-enter--delay-1">
           <span class="hero__greeting">Hi, I'm</span>
-          <span class="gradient-text">{{ portfolio.name }}</span>
+          <span class="gradient-text hero__name">{{ portfolio.name }}</span>
         </h1>
 
-        <p class="hero__tagline">
-          I build exceptional digital experiences with
-          <span class="accent-text">Flutter</span>,
-          <span class="accent-text">Laravel</span> &amp; modern technologies.
+        <p class="hero__tagline hero-enter hero-enter--delay-2">
+          {{ portfolio.tagline }}
         </p>
 
-        <div class="hero__actions">
+        <p class="hero__focus hero-enter hero-enter--delay-2">
+          {{ portfolio.focusLine }}
+        </p>
+
+        <div class="hero__actions hero-enter hero-enter--delay-3">
           <button type="button" class="btn-primary" @click="emit('navigate', 'projects')">
             View My Work
           </button>
-          <a class="btn-outline" :href="portfolio.cvUrl" download>
-            <ArrowDownToLine :size="18" />
-            Download CV
+          <a class="btn-outline hero__cv" :href="portfolio.cvUrl" download>
+            <ArrowDownToLine :size="16" />
+            Resume
           </a>
         </div>
       </div>
 
-      <div class="hero__visual">
+      <div class="hero__visual hero-enter hero-enter--delay-4">
         <div
           v-if="portfolio.available"
-          class="hero__available float-y"
-          style="animation-delay: 0.5s"
+          class="hero__available"
         >
           <span class="pulse-dot" aria-hidden="true" />
           <span>{{ portfolio.availableLabel }}</span>
@@ -56,11 +52,10 @@ const emit = defineEmits<{
 
         <HeroVideo :src="portfolio.videoSrc" />
 
-        <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <a href="#about" class="hero__scroll" aria-label="Scroll to about">
           <span class="hero__mouse">
             <span class="hero__wheel scroll-wheel" />
           </span>
-          <span>Scroll Down</span>
         </a>
       </div>
     </div>
@@ -70,176 +65,180 @@ const emit = defineEmits<{
 <style scoped>
 .hero {
   position: relative;
-  padding: 0 clamp(1.25rem, 2.2vw, 2rem) 0.25rem;
-  min-height: clamp(400px, 54svh, 540px);
+  padding: clamp(0.75rem, 1.5vh, 1.25rem) clamp(1.25rem, 2.2vw, 2rem) 0.35rem;
+  min-height: clamp(420px, 56svh, 560px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: visible;
 }
 
-.hero__lets-talk {
-  position: absolute;
-  top: clamp(0.75rem, 1.5vh, 1.25rem);
-  right: clamp(1rem, 2vw, 1.75rem);
-  z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.48rem 0.95rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 10, 18, 0.78);
-  backdrop-filter: blur(14px);
-  font-size: 0.8rem;
-  font-weight: 500;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-  transition: border-color 0.2s ease;
-}
-
-.hero__lets-talk:hover {
-  border-color: rgba(34, 197, 94, 0.45);
-}
-
 .hero__stage {
   display: grid;
-  grid-template-columns: minmax(260px, 0.88fr) minmax(320px, 1.28fr);
-  gap: clamp(0.5rem, 1.5vw, 1.25rem) clamp(0.75rem, 2vw, 1.5rem);
+  grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.2fr);
+  gap: clamp(0.75rem, 2vw, 1.75rem);
   align-items: center;
   width: 100%;
+  overflow: visible;
 }
 
 .hero__copy {
   position: relative;
   z-index: 2;
-  padding-right: 0.25rem;
-  max-width: 32rem;
+  padding-right: 0.5rem;
+  max-width: 34rem;
 }
 
 .hero__badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.42rem 0.9rem;
+  padding: 0.38rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(12, 12, 22, 0.75);
-  color: var(--text-muted);
-  font-size: 0.66rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 12, 22, 0.55);
+  color: var(--text-dim);
+  font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.07em;
-  margin-bottom: clamp(0.9rem, 1.8vh, 1.35rem);
+  letter-spacing: 0.08em;
+  margin-bottom: clamp(0.85rem, 1.6vh, 1.15rem);
   backdrop-filter: blur(10px);
 }
 
 .hero__badge-icon {
   color: var(--gold);
   flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .hero__title {
-  font-size: clamp(2.2rem, 4.2vw, 3.35rem);
-  line-height: 1.1;
-  margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+  font-size: clamp(2.35rem, 4.8vw, 3.85rem);
+  line-height: 1.05;
+  margin-bottom: clamp(0.7rem, 1.4vh, 0.95rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.05em;
+  gap: 0.02em;
 }
 
 .hero__greeting {
-  color: var(--text);
-  font-weight: 700;
+  color: rgba(242, 242, 248, 0.78);
+  font-weight: 600;
+  font-size: 0.52em;
+  letter-spacing: -0.02em;
 }
 
-.hero__title .gradient-text {
+.hero__name {
   display: inline;
+  filter: drop-shadow(0 0 28px rgba(168, 85, 247, 0.35));
 }
 
 .hero__tagline {
-  max-width: 30rem;
-  color: var(--text-muted);
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-  line-height: 1.65;
-  margin-bottom: clamp(1.25rem, 2.5vh, 1.85rem);
+  max-width: 26rem;
+  color: var(--text);
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  font-weight: 500;
+  line-height: 1.45;
+  margin-bottom: 0.55rem;
+}
+
+.hero__focus {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  margin-bottom: clamp(1.35rem, 2.6vh, 1.85rem);
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.hero__cv {
+  padding: 0.72rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
+.hero__cv:hover {
+  color: var(--text);
+  border-color: rgba(168, 85, 247, 0.35);
+  background: rgba(168, 85, 247, 0.08);
+  transform: none;
 }
 
 .hero__visual {
   position: relative;
-  min-height: clamp(400px, 54svh, 540px);
+  min-height: clamp(360px, 50svh, 520px);
   z-index: 1;
   overflow: visible;
-  margin-top: -0.5rem;
 }
 
 .hero__available {
   position: absolute;
-  top: 42%;
+  top: 40%;
   right: 2%;
   z-index: 4;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 0.95rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 10, 18, 0.82);
-  backdrop-filter: blur(16px);
-  font-size: 0.78rem;
-  color: var(--text);
-  max-width: 10.5rem;
-  line-height: 1.35;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+  gap: 0.45rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 18, 0.78);
+  backdrop-filter: blur(14px);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  max-width: 9.5rem;
+  line-height: 1.3;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
 .hero__scroll {
   position: absolute;
-  right: 0.5rem;
-  bottom: 0;
+  right: 0.35rem;
+  bottom: 0.15rem;
   z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  color: var(--text-dim);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.hero__scroll:hover {
+  opacity: 0.8;
 }
 
 .hero__mouse {
-  width: 20px;
-  height: 32px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
   display: flex;
   justify-content: center;
-  padding-top: 6px;
+  padding-top: 5px;
 }
 
 .hero__wheel {
-  width: 3px;
-  height: 6px;
+  width: 2.5px;
+  height: 5px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.65);
 }
 
 @media (max-width: 1100px) {
   .hero {
     min-height: auto;
     padding: 1.5rem 1.25rem 0.5rem;
-  }
-
-  .hero__lets-talk {
-    top: 1rem;
-    right: 1.25rem;
   }
 
   .hero__stage {
@@ -253,9 +252,11 @@ const emit = defineEmits<{
   }
 
   .hero__title {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    flex-direction: column;
+  }
+
+  .hero__greeting {
+    font-size: 0.58em;
   }
 
   .hero__visual {
@@ -266,13 +267,13 @@ const emit = defineEmits<{
   .hero__available {
     right: 0.5rem;
     top: auto;
-    bottom: 4.25rem;
+    bottom: 3.5rem;
   }
 }
 
 @media (max-width: 640px) {
   .hero__title {
-    font-size: 2.05rem;
+    font-size: 2.2rem;
   }
 
   .hero__visual {
@@ -285,8 +286,9 @@ const emit = defineEmits<{
   }
 
   .hero__actions .btn-primary,
-  .hero__actions .btn-outline {
+  .hero__actions .hero__cv {
     width: 100%;
+    justify-content: center;
   }
 }
 </style>

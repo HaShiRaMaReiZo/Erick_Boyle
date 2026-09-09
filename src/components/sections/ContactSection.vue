@@ -24,13 +24,13 @@ function onSubmit() {
 
 <template>
   <section id="contact" class="section-pad contact">
-    <div class="contact__intro">
+    <div class="contact__intro" v-reveal="'fade'">
       <h2>Get In Touch</h2>
       <p>Ready to start your next project? Let's work together.</p>
     </div>
 
     <div class="contact__grid">
-      <form class="contact__form glass" @submit.prevent="onSubmit">
+      <form class="contact__form glass" v-reveal="'left'" @submit.prevent="onSubmit">
         <h3>Send me a message</h3>
 
         <label>
@@ -62,7 +62,7 @@ function onSubmit() {
         <p v-if="submitted" class="contact__hint">Opening your email client…</p>
       </form>
 
-      <div class="contact__aside">
+      <div class="contact__aside" v-reveal="'right'" data-reveal-delay="2">
         <div class="contact__info glass">
           <h3>Contact Information</h3>
           <a :href="`mailto:${portfolio.contact.email}`" class="contact__row">
@@ -95,7 +95,7 @@ function onSubmit() {
       </div>
     </div>
 
-    <footer class="contact__footer">
+    <footer class="contact__footer" v-reveal="'fade'">
       © {{ new Date().getFullYear() }} {{ portfolio.name }}. All rights reserved.
     </footer>
   </section>

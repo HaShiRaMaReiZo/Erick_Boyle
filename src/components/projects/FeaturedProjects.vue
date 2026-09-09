@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ArrowRight } from '@lucide/vue'
-import { portfolio } from '@/data/portfolio'
+import { portfolio, type Project } from '@/data/portfolio'
 import ProjectCard from './ProjectCard.vue'
+import ProjectDetailModal from './ProjectDetailModal.vue'
 
 const emit = defineEmits<{
   navigate: [id: string]
 }>()
 
+const selected = ref<Project | null>(null)
 const featured = computed(() => portfolio.projects.filter((p) => p.featured).slice(0, 4))
+
+function openProject(project: Project) {
+  selected.value = project
+}
 </script>
 
 <template>
   <section class="featured section-pad">
-    <div class="featured__head">
+    <div class="featured__head" v-reveal="'fade'">
       <h2>Featured Projects</h2>
       <button type="button" class="featured__link" @click="emit('navigate', 'projects')">
         View All Projects
@@ -21,8 +27,17 @@ const featured = computed(() => portfolio.projects.filter((p) => p.featured).sli
       </button>
     </div>
     <div class="featured__grid">
-      <ProjectCard v-for="project in featured" :key="project.id" :project="project" />
+      <div
+        v-for="(project, i) in featured"
+        :key="project.id"
+        v-reveal="'up'"
+        :data-reveal-delay="String((i % 4) + 1)"
+      >
+        <ProjectCard :project="project" @open="openProject" />
+      </div>
     </div>
+
+    <ProjectDetailModal :project="selected" @close="selected = null" />
   </section>
 </template>
 
@@ -50,20 +65,20 @@ const featured = computed(() => portfolio.projects.filter((p) => p.featured).sli
   gap: 0.35rem;
   border: none;
   background: transparent;
-  color: #60a5fa;
+  color: #c084fc;
   font-size: 0.88rem;
   font-weight: 500;
   transition: color 0.2s ease, gap 0.2s ease;
 }
 
 .featured__link:hover {
-  color: #93c5fd;
+  color: #e9d5ff;
   gap: 0.55rem;
 }
 
 .featured__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.95rem;
 }
 

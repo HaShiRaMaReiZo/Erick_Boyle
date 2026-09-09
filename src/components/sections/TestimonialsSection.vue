@@ -5,7 +5,7 @@ import { portfolio } from '@/data/portfolio'
 
 <template>
   <section id="testimonials" class="section-pad testimonials">
-    <div class="testimonials__intro">
+    <div class="testimonials__intro" v-reveal="'fade'">
       <h2>Testimonials</h2>
       <p>What collaborators and clients say about working together.</p>
     </div>
@@ -15,6 +15,8 @@ import { portfolio } from '@/data/portfolio'
         v-for="(item, i) in portfolio.testimonials"
         :key="i"
         class="testimonials__card glass"
+        v-reveal="'up'"
+        :data-reveal-delay="String(i + 1)"
       >
         <Quote :size="22" class="testimonials__quote-icon" />
         <p class="testimonials__quote">“{{ item.quote }}”</p>

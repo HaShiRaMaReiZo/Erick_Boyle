@@ -4,19 +4,26 @@ import { portfolio } from '@/data/portfolio'
 
 <template>
   <section id="skills" class="section-pad skills">
-    <div class="skills__intro">
+    <div class="skills__intro" v-reveal="'fade'">
       <h2>Technical Skills</h2>
       <p>Technologies I use to ship reliable web and mobile products.</p>
     </div>
 
     <div class="skills__grid">
-      <div v-for="skill in portfolio.skills" :key="skill.name" class="skill glass">
+      <div
+        v-for="(skill, i) in portfolio.skills"
+        :key="skill.name"
+        class="skill glass"
+        v-reveal="'up'"
+        :data-reveal-delay="String((i % 6) + 1)"
+        :style="{ '--skill-level': skill.level + '%' }"
+      >
         <div class="skill__head">
           <span>{{ skill.name }}</span>
           <span class="skill__pct">{{ skill.level }}%</span>
         </div>
         <div class="skill__track">
-          <div class="skill__fill" :style="{ width: `${skill.level}%` }" />
+          <div class="skill__fill" />
         </div>
       </div>
     </div>
@@ -71,10 +78,10 @@ import { portfolio } from '@/data/portfolio'
 
 .skill__fill {
   height: 100%;
+  width: 0;
   border-radius: 999px;
   background: var(--gradient-btn);
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.45);
-  transition: width 0.8s ease;
 }
 
 @media (max-width: 720px) {

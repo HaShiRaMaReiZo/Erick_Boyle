@@ -4,22 +4,24 @@ import { portfolio } from '@/data/portfolio'
 
 <template>
   <section id="about" class="section-pad about">
-    <div class="about__intro">
+    <div class="about__intro" v-reveal="'fade'">
       <h2>{{ portfolio.about.title }}</h2>
       <p>{{ portfolio.about.subtitle }}</p>
     </div>
 
     <div class="about__grid">
-      <div class="about__story glass">
+      <div class="about__story glass" v-reveal="'left'">
         <h3>{{ portfolio.about.storyTitle }}</h3>
         <p v-for="(para, i) in portfolio.about.story" :key="i">{{ para }}</p>
       </div>
 
       <div class="about__highlights">
         <article
-          v-for="item in portfolio.about.highlights"
+          v-for="(item, i) in portfolio.about.highlights"
           :key="item.title"
           class="about__card glass"
+          v-reveal="'right'"
+          :data-reveal-delay="String(i + 1)"
         >
           <h4>{{ item.title }}</h4>
           <p>{{ item.description }}</p>

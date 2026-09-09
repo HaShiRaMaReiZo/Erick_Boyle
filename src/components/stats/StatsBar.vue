@@ -19,9 +19,11 @@ const toneClass: Record<string, string> = {
       :key="stat.label"
       class="stat"
       :class="{ 'stat--divider': i > 0 }"
+      v-reveal="'scale'"
+      :data-reveal-delay="String(i + 1)"
     >
       <div class="stat__icon" :class="toneClass[stat.tone]">
-        <component :is="icons[i]" :size="17" stroke-width="1.75" />
+        <component :is="icons[i]" :size="15" stroke-width="1.75" />
       </div>
       <div>
         <div class="stat__value">{{ stat.value }}</div>
@@ -35,31 +37,31 @@ const toneClass: Record<string, string> = {
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.25rem;
-  margin: 0.35rem clamp(1rem, 2vw, 2rem) 0.65rem;
-  padding: 0.85rem 0.35rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 10, 20, 0.72);
-  backdrop-filter: blur(16px);
+  gap: 0.2rem;
+  margin: 0.15rem clamp(1rem, 2vw, 2rem) 0.45rem;
+  padding: 0.65rem 0.3rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 10, 20, 0.62);
+  backdrop-filter: blur(14px);
 }
 
 .stat {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 0.25rem 0.75rem;
+  gap: 0.65rem;
+  padding: 0.2rem 0.65rem;
 }
 
 .stat--divider {
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .stat__icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -91,15 +93,15 @@ const toneClass: Record<string, string> = {
 
 .stat__value {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .stat__label {
   color: var(--text-dim);
-  font-size: 0.76rem;
-  margin-top: 0.12rem;
+  font-size: 0.7rem;
+  margin-top: 0.1rem;
 }
 
 @media (max-width: 1100px) {

@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 
 :root {
-  --bg: #060814;
-  --bg-elevated: #0a1020;
-  --surface: rgba(10, 14, 28, 0.62);
-  --surface-solid: #101828;
+  --bg: #07071a;
+  --bg-elevated: #0a0b1e;
+  --surface: rgba(12, 12, 28, 0.62);
+  --surface-solid: #12122a;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
   --text: #f2f2f8;
@@ -17,12 +17,12 @@
   --cyan: #38bdf8;
   --green: #22c55e;
   --gold: #eab308;
-  /* Blue-forward brand gradient (blue > purple) */
-  --gradient-brand: linear-gradient(90deg, #818cf8 0%, #60a5fa 35%, #38bdf8 70%, #22d3ee 100%);
-  --gradient-btn: linear-gradient(110deg, #2563eb 0%, #4f46e5 45%, #7c3aed 100%);
-  --gradient-ring: linear-gradient(135deg, #22d3ee, #38bdf8, #6366f1, #a855f7);
-  --glow-purple: 0 0 40px rgba(129, 140, 248, 0.35);
-  --glow-blue: 0 0 40px rgba(56, 189, 248, 0.35);
+  /* magenta/purple → cyan/blue like the video halo */
+  --gradient-brand: linear-gradient(90deg, #c084fc 0%, #a855f7 35%, #6366f1 65%, #38bdf8 100%);
+  --gradient-btn: linear-gradient(110deg, #6366f1 0%, #8b5cf6 45%, #a855f7 100%);
+  --gradient-ring: linear-gradient(135deg, #22d3ee, #818cf8, #a855f7, #d946ef);
+  --glow-purple: 0 0 40px rgba(168, 85, 247, 0.4);
+  --glow-blue: 0 0 40px rgba(34, 211, 238, 0.3);
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Outfit', sans-serif;
   --sidebar-w: 232px;
@@ -44,8 +44,8 @@ body {
   min-height: 100svh;
   font-family: var(--font-body);
   color: var(--text);
-  /* Match deep space navy — SpaceBackdrop paints the rest */
-  background-color: #060814;
+  /* Match video deep space navy — SpaceBackdrop paints the rest */
+  background-color: #07071a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -101,7 +101,7 @@ video {
 }
 
 .accent-text {
-  color: #93c5fd;
+  color: #c4b5fd;
   font-weight: 600;
 }
 
@@ -132,8 +132,8 @@ video {
   font-size: 0.92rem;
   background: var(--gradient-btn);
   box-shadow:
-    0 0 22px rgba(56, 189, 248, 0.35),
-    0 8px 28px rgba(37, 99, 235, 0.35);
+    0 0 22px rgba(168, 85, 247, 0.42),
+    0 8px 28px rgba(99, 102, 241, 0.35);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -144,8 +144,8 @@ video {
   transform: translateY(-2px);
   filter: brightness(1.08);
   box-shadow:
-    0 0 30px rgba(56, 189, 248, 0.45),
-    0 12px 36px rgba(37, 99, 235, 0.42);
+    0 0 30px rgba(168, 85, 247, 0.52),
+    0 12px 36px rgba(99, 102, 241, 0.45);
 }
 
 .btn-outline {
@@ -249,4 +249,128 @@ video {
 
 .main-scroll::-webkit-scrollbar-thumb:hover {
   background: rgba(168, 85, 247, 0.4);
+}
+
+/* ---------- Scroll reveal (fade in / out + motion) ---------- */
+[data-reveal] {
+  --reveal-distance: 28px;
+  --reveal-duration: 0.7s;
+  --reveal-delay: 0ms;
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition:
+    opacity var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    transform var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    filter var(--reveal-duration) ease var(--reveal-delay);
+  filter: blur(4px);
+  will-change: opacity, transform;
+}
+
+[data-reveal='fade'] {
+  transform: none;
+  filter: blur(6px);
+}
+
+[data-reveal='left'] {
+  transform: translate3d(calc(var(--reveal-distance) * -1), 0, 0);
+}
+
+[data-reveal='right'] {
+  transform: translate3d(var(--reveal-distance), 0, 0);
+}
+
+[data-reveal='scale'] {
+  transform: scale(0.94);
+  filter: blur(3px);
+}
+
+[data-reveal='up'] {
+  transform: translate3d(0, var(--reveal-distance), 0);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Stagger helpers */
+[data-reveal-delay='1'] {
+  --reveal-delay: 80ms;
+}
+[data-reveal-delay='2'] {
+  --reveal-delay: 160ms;
+}
+[data-reveal-delay='3'] {
+  --reveal-delay: 240ms;
+}
+[data-reveal-delay='4'] {
+  --reveal-delay: 320ms;
+}
+[data-reveal-delay='5'] {
+  --reveal-delay: 400ms;
+}
+[data-reveal-delay='6'] {
+  --reveal-delay: 480ms;
+}
+
+/* Hero load entrance */
+.hero-enter {
+  opacity: 0;
+  animation: hero-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-enter--delay-1 {
+  animation-delay: 0.1s;
+}
+.hero-enter--delay-2 {
+  animation-delay: 0.22s;
+}
+.hero-enter--delay-3 {
+  animation-delay: 0.34s;
+}
+.hero-enter--delay-4 {
+  animation-delay: 0.46s;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* Skill bars grow when revealed */
+[data-reveal].skill .skill__fill,
+.skill[data-reveal] .skill__fill {
+  width: 0 !important;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+[data-reveal].skill.is-revealed .skill__fill,
+.skill[data-reveal].is-revealed .skill__fill {
+  width: var(--skill-level) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal].is-revealed,
+  .hero-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  [data-reveal].skill .skill__fill,
+  .skill[data-reveal] .skill__fill {
+    width: var(--skill-level) !important;
+  }
 }

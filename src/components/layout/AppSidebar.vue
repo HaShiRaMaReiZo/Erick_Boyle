@@ -6,11 +6,10 @@ import {
   FolderKanban,
   Briefcase,
   MessageSquareQuote,
-  Newspaper,
   Mail,
   CodeXml,
   Share2,
-  Globe,
+  Send,
   X,
 } from '@lucide/vue'
 import { portfolio } from '@/data/portfolio'
@@ -33,7 +32,6 @@ const iconMap = {
   projects: FolderKanban,
   experience: Briefcase,
   testimonials: MessageSquareQuote,
-  blog: Newspaper,
   contact: Mail,
 } as const
 
@@ -76,8 +74,13 @@ function onNav(id: string) {
     </button>
 
     <div class="sidebar__brand">
-      <div class="sidebar__logo" aria-label="EB logo">
-        <span class="sidebar__logo-e">E</span><span class="sidebar__logo-b">B</span>
+      <div class="sidebar__logo" :aria-label="portfolio.initials + ' logo'">
+        <span
+          v-for="(char, i) in portfolio.initials"
+          :key="i"
+          class="sidebar__logo-char"
+          :class="{ 'sidebar__logo-char--skew': i === 0 }"
+        >{{ char }}</span>
       </div>
     </div>
 
@@ -124,13 +127,13 @@ function onNav(id: string) {
         <Mail :size="16" />
       </a>
       <a
-        :href="portfolio.social.website"
+        :href="portfolio.social.telegram"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Website"
+        aria-label="Telegram"
         class="sidebar__social-btn"
       >
-        <Globe :size="16" />
+        <Send :size="16" />
       </a>
     </div>
   </aside>
@@ -184,23 +187,22 @@ function onNav(id: string) {
   font-size: 1.55rem;
   letter-spacing: -0.06em;
   line-height: 1;
-  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+  filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
 }
 
-.sidebar__logo-e,
-.sidebar__logo-b {
-  background: linear-gradient(180deg, #60a5fa 0%, #38bdf8 45%, #818cf8 100%);
+.sidebar__logo-char {
+  background: linear-gradient(180deg, #d946ef 0%, #a855f7 42%, #38bdf8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
-.sidebar__logo-e {
+.sidebar__logo-char--skew {
   transform: skewX(-8deg);
 }
 
-.sidebar__logo-b {
+.sidebar__logo-char:not(.sidebar__logo-char--skew) {
   transform: skewX(-4deg);
   margin-left: -0.05em;
 }
@@ -216,9 +218,9 @@ function onNav(id: string) {
   padding: 2.5px;
   background: var(--gradient-ring);
   box-shadow:
-    0 0 0 1px rgba(59, 130, 246, 0.25),
-    0 0 22px rgba(56, 189, 248, 0.35),
-    0 0 40px rgba(99, 102, 241, 0.2);
+    0 0 0 1px rgba(99, 102, 241, 0.2),
+    0 0 22px rgba(168, 85, 247, 0.4),
+    0 0 40px rgba(34, 211, 238, 0.18);
 }
 
 .sidebar__avatar img {
@@ -267,10 +269,10 @@ function onNav(id: string) {
 
 .sidebar__link--active {
   color: white;
-  background: linear-gradient(115deg, rgba(37, 99, 235, 0.45), rgba(99, 102, 241, 0.35));
+  background: linear-gradient(115deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.4));
   box-shadow:
-    inset 0 0 0 1px rgba(147, 197, 253, 0.22),
-    0 6px 20px rgba(37, 99, 235, 0.22);
+    inset 0 0 0 1px rgba(192, 132, 252, 0.22),
+    0 6px 20px rgba(124, 58, 237, 0.18);
 }
 
 .sidebar__social {

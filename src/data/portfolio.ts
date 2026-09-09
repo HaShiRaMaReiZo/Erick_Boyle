@@ -1,20 +1,50 @@
+export type ProjectComponent = {
+  name: string
+  description: string
+  technologies: string[]
+  screenshots?: string[]
+}
+
+export type Project = {
+  id: string
+  title: string
+  description: string
+  fullDescription?: string
+  tech: string[]
+  category: string
+  featured: boolean
+  image: string
+  screenshots?: string[]
+  components?: ProjectComponent[]
+  url?: string
+  liveUrl?: string
+  githubUrl?: string
+}
+
+export type NavItem = {
+  id: string
+  label: string
+}
+
 export const portfolio = {
   initials: 'EB',
   name: 'Erick Boyle',
   brandName: 'Erick Boyle',
-  role: 'Flutter & Full Stack Developer',
-  tagline:
-    'I build exceptional digital experiences with Flutter, Laravel & modern technologies.',
+  role: 'Full Stack & Mobile App Developer',
+  tagline: 'I build Flutter & Laravel apps that ship.',
+  focusLine: 'Delivery apps · APK platforms · Flutter',
   available: true,
   availableLabel: 'Available for freelance work',
   avatar: '/images/avatar.jpg',
   cvUrl: '/cv.pdf',
-  videoSrc: '/videos/hero-loop.mp4?v=4',
+  videoSrc: '/videos/hero-loop.orig.mp4',
   social: {
-    github: 'https://github.com/',
-    linkedin: 'https://linkedin.com/',
+    github: 'https://github.com/HaShiRaMaReiZo',
+    linkedin: 'https://www.linkedin.com/in/zwe-mann-htet',
     email: 'mailto:zwemannhtet65@gmail.com',
-    website: 'https://erickboyle.website/',
+    telegram: 'https://t.me/erickboyle',
+    instagram: 'https://www.instagram.com/erick_boyle_2004',
+    viber: 'viber://chat?number=+959792627041',
   },
   contact: {
     email: 'zwemannhtet65@gmail.com',
@@ -26,8 +56,8 @@ export const portfolio = {
     subtitle: 'Get to know more about my background and expertise',
     storyTitle: 'My Story',
     story: [
-      "I'm a passionate full-stack developer with over 3 years of experience in creating digital solutions that make a difference. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
-      'I specialize in modern web technologies and have a strong foundation in both frontend and backend development. I love turning complex problems into simple, beautiful, and intuitive solutions.',
+      "I'm a passionate full-stack developer with over 2 years of experience in creating digital solutions that make a difference. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
+      'I specialize in modern web technologies and have a strong foundation in both frontend and backend development. I love turning complex problems into simple, beautiful, and intuitive solutions. Passionate about creating exceptional digital experiences through innovative web development and thoughtful design.',
     ],
     highlights: [
       {
@@ -48,10 +78,10 @@ export const portfolio = {
     ],
   },
   stats: [
-    { value: '3+', label: 'Years Experience', tone: 'green' as const },
-    { value: '25+', label: 'Projects Completed', tone: 'purple' as const },
-    { value: '15+', label: 'Happy Clients', tone: 'gold' as const },
-    { value: '3', label: 'Countries Served', tone: 'blue' as const },
+    { value: '2+', label: 'Years Experience', tone: 'green' as const },
+    { value: '20+', label: 'Projects Completed', tone: 'purple' as const },
+    { value: '10+', label: 'Happy Clients', tone: 'gold' as const },
+    { value: '2', label: 'Countries Served', tone: 'blue' as const },
   ],
   skills: [
     { name: 'Flutter', level: 80 },
@@ -66,72 +96,181 @@ export const portfolio = {
   ],
   projects: [
     {
-      id: 'merchant-app',
-      title: 'Merchant App',
-      description:
-        'Merchant-facing mobile experience for order management and store operations, built with Flutter and a Laravel API.',
-      tech: ['Flutter', 'Laravel', 'MySQL'],
-      category: 'Mobile Apps',
-      featured: true,
-      image: '/images/projects/merchant.jpg',
-      url: '#',
-    },
-    {
-      id: 'tracking-system',
-      title: 'Tracking System',
-      description:
-        'Real-time tracking and monitoring platform with Flutter clients, Laravel APIs, and Socket.io live updates.',
-      tech: ['Flutter', 'Laravel', 'Socket.io'],
-      category: 'Full Stack',
-      featured: true,
-      image: '/images/projects/tracking.jpg',
-      url: '#',
-    },
-    {
-      id: 'ecommerce-app',
-      title: 'E-Commerce App',
-      description:
-        'Fashion e-commerce experience with Flutter storefront and Laravel/Bagisto backend for catalog and checkout.',
-      tech: ['Flutter', 'Laravel', 'Bagisto'],
-      category: 'Mobile Apps',
-      featured: true,
-      image: '/images/projects/ecommerce.jpg',
-      url: '#',
-    },
-    {
-      id: 'analytics-dashboard',
-      title: 'Analytics Dashboard',
-      description:
-        'Dark-themed analytics dashboard with charts, activity feeds, and role-based views powered by Flutter and Node.js.',
-      tech: ['Flutter', 'Node.js', 'MongoDB'],
-      category: 'Web Development',
-      featured: true,
-      image: '/images/projects/analytics.jpg',
-      url: '#',
-    },
-    {
       id: 'delivery',
       title: 'Delivery Service Project',
       description:
         'A full-stack delivery service platform with Laravel backend, web dashboard, and two Flutter mobile applications for riders and clients.',
-      tech: ['Laravel', 'PHP', 'Flutter', 'Dart', 'REST API', 'MySQL'],
+      fullDescription:
+        'A comprehensive delivery service platform consisting of a Laravel REST API and web dashboard for administration, along with two Flutter mobile applications: one for delivery riders and another for clients. The system enables real-time order tracking, payment processing, and efficient delivery management.',
+      tech: ['Laravel', 'PHP', 'Flutter', 'Dart', 'REST API', 'MySQL', 'Mobile Development'],
       category: 'Full Stack',
-      featured: false,
-      image: '/images/projects/merchant.jpg',
-      url: '#',
+      featured: true,
+      image: '/web-ss/web-1.jpg',
+      screenshots: [
+        '/web-ss/web-1.jpg',
+        '/web-ss/web-2.jpg',
+        '/web-ss/web-3.jpg',
+        '/web-ss/web-5.jpg',
+        '/web-ss/web-6.jpg',
+        '/web-ss/web-7.jpg',
+        '/rider-ss/rider-1.jpg',
+        '/rider-ss/rider-2.jpg',
+        '/rider-ss/rider-3.jpg',
+        '/rider-ss/rider-4.jpg',
+        '/rider-ss/rider-5.jpg',
+        '/rider-ss/rider-6.jpg',
+        '/client-ss/client-1.jpg',
+        '/client-ss/client-2.jpg',
+        '/client-ss/client-3.jpg',
+        '/client-ss/client-4.jpg',
+        '/client-ss/client-5.jpg',
+        '/client-ss/client-6.jpg',
+        '/client-ss/client-7.jpg',
+      ],
+      components: [
+        {
+          name: 'Laravel API & Web Dashboard',
+          description:
+            'Backend REST API and administrative web interface built with Laravel for managing orders, users, and deliveries.',
+          technologies: ['Laravel', 'PHP', 'MySQL', 'REST API'],
+          screenshots: [
+            '/web-ss/web-1.jpg',
+            '/web-ss/web-2.jpg',
+            '/web-ss/web-3.jpg',
+            '/web-ss/web-5.jpg',
+            '/web-ss/web-6.jpg',
+            '/web-ss/web-7.jpg',
+          ],
+        },
+        {
+          name: 'Rider App',
+          description:
+            'Flutter mobile application for delivery riders to receive orders, navigate to locations, and update delivery status.',
+          technologies: ['Flutter', 'Dart', 'Mobile Development'],
+          screenshots: [
+            '/rider-ss/rider-1.jpg',
+            '/rider-ss/rider-2.jpg',
+            '/rider-ss/rider-3.jpg',
+            '/rider-ss/rider-4.jpg',
+            '/rider-ss/rider-5.jpg',
+            '/rider-ss/rider-6.jpg',
+          ],
+        },
+        {
+          name: 'Client App',
+          description:
+            'Flutter mobile application for clients to place orders, track deliveries in real-time, and make payments.',
+          technologies: ['Flutter', 'Dart', 'Mobile Development'],
+          screenshots: [
+            '/client-ss/client-1.jpg',
+            '/client-ss/client-2.jpg',
+            '/client-ss/client-3.jpg',
+            '/client-ss/client-4.jpg',
+            '/client-ss/client-5.jpg',
+            '/client-ss/client-6.jpg',
+            '/client-ss/client-7.jpg',
+          ],
+        },
+      ],
     },
     {
       id: 'apk-manager',
       title: 'APK Manager',
       description:
         'A Laravel-based application management platform that allows developers to upload APK files and provides a client interface for users to browse, download, and install applications.',
-      tech: ['Laravel', 'PHP', 'MySQL', 'Bootstrap', 'JavaScript'],
+      fullDescription:
+        'A comprehensive Laravel web application that serves as a platform for managing Android APK files. The system features a developer interface where developers can upload, manage, and organize their applications. The client interface provides end-users with an intuitive way to browse available applications, view details, and download/install APK files directly to their devices.',
+      tech: ['Laravel', 'PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'File Upload', 'Web Development'],
       category: 'Web Development',
-      featured: false,
-      image: '/images/projects/analytics.jpg',
-      url: '#',
+      featured: true,
+      image: '/apk-manager/am-1.jpg',
+      screenshots: [
+        '/apk-manager/am-1.jpg',
+        '/apk-manager/developer-interface/di-1.jpg',
+        '/apk-manager/developer-interface/di-2.jpg',
+        '/apk-manager/developer-interface/di-3.jpg',
+        '/apk-manager/developer-interface/di-4.jpg',
+        '/apk-manager/client-interface/ci-1.jpg',
+        '/apk-manager/client-interface/ci-2.jpg',
+        '/apk-manager/client-interface/ci-3.jpg',
+        '/apk-manager/client-interface/ci-4.jpg',
+      ],
+      components: [
+        {
+          name: 'Developer Interface',
+          description:
+            'Administrative interface for developers to upload, manage, and organize APK files. Includes file upload functionality, app metadata management, and developer dashboard.',
+          technologies: ['Laravel', 'PHP', 'Bootstrap', 'File Upload'],
+          screenshots: [
+            '/apk-manager/developer-interface/di-1.jpg',
+            '/apk-manager/developer-interface/di-2.jpg',
+            '/apk-manager/developer-interface/di-3.jpg',
+            '/apk-manager/developer-interface/di-4.jpg',
+          ],
+        },
+        {
+          name: 'Client Interface',
+          description:
+            'User-friendly interface for end-users to browse available applications, view app details, and download/install APK files directly to their devices.',
+          technologies: ['Laravel', 'PHP', 'Bootstrap', 'JavaScript'],
+          screenshots: [
+            '/apk-manager/client-interface/ci-1.jpg',
+            '/apk-manager/client-interface/ci-2.jpg',
+            '/apk-manager/client-interface/ci-3.jpg',
+            '/apk-manager/client-interface/ci-4.jpg',
+          ],
+        },
+      ],
     },
-  ],
+    {
+      id: 'expense-tracker',
+      title: 'Expense Tracker App',
+      description:
+        'A React Native mobile application with Node.js backend for tracking personal expenses. Built as a learning project to practice React Native fundamentals.',
+      fullDescription:
+        'A React Native mobile application with Node.js backend for tracking personal expenses. This was my first React Native project, built for learning and training purposes. The app allows users to add, view, and manage their expenses. While the UI is basic, it demonstrates understanding of React Native core concepts, state management, and API integration with a Node.js backend.',
+      tech: ['React Native', 'Node.js', 'JavaScript', 'Mobile Development', 'REST API'],
+      category: 'Mobile Apps',
+      featured: true,
+      image: '/expense-tracker-ss/et1.jpg',
+      screenshots: [
+        '/expense-tracker-ss/et1.jpg',
+        '/expense-tracker-ss/et2.jpg',
+        '/expense-tracker-ss/et3.jpg',
+        '/expense-tracker-ss/et4.jpg',
+        '/expense-tracker-ss/et5.jpg',
+        '/expense-tracker-ss/et6.jpg',
+        '/expense-tracker-ss/et7.jpg',
+        '/expense-tracker-ss/et8.jpg',
+        '/expense-tracker-ss/et9.jpg',
+      ],
+      components: [
+        {
+          name: 'React Native Mobile App',
+          description:
+            'Mobile application built with React Native for tracking expenses. Includes features for adding, viewing, and managing expenses.',
+          technologies: ['React Native', 'JavaScript', 'Mobile Development'],
+          screenshots: [
+            '/expense-tracker-ss/et1.jpg',
+            '/expense-tracker-ss/et2.jpg',
+            '/expense-tracker-ss/et3.jpg',
+            '/expense-tracker-ss/et4.jpg',
+            '/expense-tracker-ss/et5.jpg',
+            '/expense-tracker-ss/et6.jpg',
+            '/expense-tracker-ss/et7.jpg',
+            '/expense-tracker-ss/et8.jpg',
+            '/expense-tracker-ss/et9.jpg',
+          ],
+        },
+        {
+          name: 'Node.js Backend',
+          description:
+            'RESTful API backend built with Node.js to handle expense data, user authentication, and data persistence.',
+          technologies: ['Node.js', 'JavaScript', 'REST API'],
+        },
+      ],
+    },
+  ] satisfies Project[],
   experience: [
     {
       role: 'Full Stack Developer',
@@ -151,7 +290,7 @@ export const portfolio = {
   testimonials: [
     {
       quote:
-        'Zwe delivered a polished Flutter app and a solid Laravel backend. Communication was clear and deadlines were met.',
+        'Erick delivered a polished Flutter app and a solid Laravel backend. Communication was clear and deadlines were met.',
       author: 'Client Partner',
       role: 'Product Owner',
     },
@@ -162,29 +301,6 @@ export const portfolio = {
       role: 'Project Lead',
     },
   ],
-  blog: [
-    {
-      title: 'Building delivery apps with Flutter & Laravel',
-      excerpt:
-        'Notes from shipping rider and client apps backed by a shared Laravel API.',
-      date: '2025',
-      tag: 'Mobile',
-    },
-    {
-      title: 'APK distribution without the friction',
-      excerpt:
-        'How a simple upload-and-browse flow helps teams share internal Android builds.',
-      date: '2025',
-      tag: 'Web',
-    },
-    {
-      title: 'Clean code habits that stick',
-      excerpt:
-        'Small practices that keep Flutter and Laravel codebases maintainable as they grow.',
-      date: '2024',
-      tag: 'Engineering',
-    },
-  ],
   nav: [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
@@ -192,11 +308,8 @@ export const portfolio = {
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
     { id: 'testimonials', label: 'Testimonials' },
-    { id: 'blog', label: 'Blog' },
     { id: 'contact', label: 'Contact' },
-  ],
-} as const
+  ] satisfies NavItem[],
+}
 
 export type Portfolio = typeof portfolio
-export type NavItem = (typeof portfolio.nav)[number]
-export type Project = (typeof portfolio.projects)[number]

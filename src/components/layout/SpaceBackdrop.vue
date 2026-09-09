@@ -62,9 +62,6 @@ onUnmounted(() => {
 
 <template>
   <div class="space-bg" aria-hidden="true">
-    <div class="space-bg__nebula space-bg__nebula--a" />
-    <div class="space-bg__nebula space-bg__nebula--b" />
-    <div class="space-bg__nebula space-bg__nebula--c" />
     <canvas ref="canvasRef" class="space-bg__stars" />
 
     <!-- Floating asteroids matching the video scene -->
@@ -128,49 +125,8 @@ onUnmounted(() => {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  /* Same deep navy as the video so layers feel continuous */
-  background: #060814;
-}
-
-.space-bg__nebula {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-}
-
-/* Soft nebula blobs — blue-forward, aligned with hero video halo */
-.space-bg__nebula--a {
-  width: min(75vw, 860px);
-  height: min(75vw, 860px);
-  top: -12%;
-  right: -2%;
-  background: radial-gradient(
-    circle,
-    rgba(56, 189, 248, 0.26) 0%,
-    rgba(37, 99, 235, 0.14) 40%,
-    transparent 68%
-  );
-}
-
-.space-bg__nebula--b {
-  width: min(60vw, 680px);
-  height: min(60vw, 680px);
-  top: 28%;
-  left: 18%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 70%);
-}
-
-.space-bg__nebula--c {
-  width: min(55vw, 580px);
-  height: min(55vw, 580px);
-  bottom: -10%;
-  right: 28%;
-  background: radial-gradient(
-    circle,
-    rgba(14, 165, 233, 0.12) 0%,
-    rgba(99, 102, 241, 0.08) 45%,
-    transparent 72%
-  );
+  /* Deep dark space only — no blue milky-way / nebula washes */
+  background: #07071a;
 }
 
 .space-bg__stars {
