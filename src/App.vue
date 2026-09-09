@@ -3,6 +3,7 @@ import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { Menu } from '@lucide/vue'
 import { portfolio } from '@/data/portfolio'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
+import PageLoader from '@/components/layout/PageLoader.vue'
 import SpaceBackdrop from '@/components/layout/SpaceBackdrop.vue'
 import HeroSection from '@/components/hero/HeroSection.vue'
 import StatsBar from '@/components/stats/StatsBar.vue'
@@ -14,6 +15,7 @@ import ExperienceSection from '@/components/sections/ExperienceSection.vue'
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 
+const loading = ref(true)
 const activeId = ref('home')
 const sidebarOpen = ref(false)
 const mainEl = ref<HTMLElement | null>(null)
@@ -94,7 +96,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="app-shell">
+  <div class="app-shell" :class="{ 'app-shell--booting': loading }">
+    <PageLoader v-model="loading" />
+
     <SpaceBackdrop />
 
     <div
@@ -159,6 +163,11 @@ onUnmounted(() => {
   position: relative;
   min-height: 100svh;
   isolation: isolate;
+}
+
+.app-shell--booting {
+  overflow: hidden;
+  height: 100svh;
 }
 
 .backdrop {
