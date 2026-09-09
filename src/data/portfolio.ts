@@ -57,8 +57,8 @@ export const portfolio = {
     subtitle: 'Get to know more about my background and expertise',
     storyTitle: 'My Story',
     story: [
-      "I'm Erick Boyle (official name Zwe Mhan Htet), a passionate full-stack developer with over 3 years of experience in creating digital solutions that make a difference. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
-      'I specialize in modern web technologies and have a strong foundation in both frontend and backend development. I love turning complex problems into simple, beautiful, and intuitive solutions. Passionate about creating exceptional digital experiences through innovative web development and thoughtful design.',
+      "I'm Erick Boyle (official name Zwe Mhan Htet), a full-stack and mobile developer building production web and mobile apps since 2022. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
+      'I specialize in Flutter, React Native, Laravel, Vue, and related full-stack workflows—from APIs and business logic to Android release prep. I love turning complex problems into simple, beautiful, and intuitive solutions.',
     ],
     highlights: [
       {
