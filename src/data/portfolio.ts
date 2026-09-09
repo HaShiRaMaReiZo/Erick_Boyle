@@ -31,8 +31,8 @@ export const portfolio = {
   name: 'Erick Boyle',
   brandName: 'Erick Boyle',
   role: 'Full Stack & Mobile App Developer',
-  tagline: 'I build Flutter & Laravel apps that ship.',
-  focusLine: 'Delivery apps · APK platforms · Flutter',
+  tagline:
+    'Passionate about creating exceptional digital experiences through innovative web development and thoughtful design. I specialize in building scalable applications that make a difference.',
   available: true,
   availableLabel: 'Available for freelance work',
   avatar: '/images/avatar.jpg',
@@ -41,13 +41,13 @@ export const portfolio = {
   social: {
     github: 'https://github.com/HaShiRaMaReiZo',
     linkedin: 'https://www.linkedin.com/in/zwe-mann-htet',
-    email: 'mailto:zwemannhtet65@gmail.com',
+    email: 'mailto:zwemhanhtet2004@gmail.com',
     telegram: 'https://t.me/erickboyle',
     instagram: 'https://www.instagram.com/erick_boyle_2004',
     viber: 'viber://chat?number=+959792627041',
   },
   contact: {
-    email: 'zwemannhtet65@gmail.com',
+    email: 'zwemhanhtet2004@gmail.com',
     phone: '+95 9792627041',
     location: 'Yangon, Myanmar',
   },

@@ -19,8 +19,6 @@ const toneClass: Record<string, string> = {
       :key="stat.label"
       class="stat"
       :class="{ 'stat--divider': i > 0 }"
-      v-reveal="'scale'"
-      :data-reveal-delay="String(i + 1)"
     >
       <div class="stat__icon" :class="toneClass[stat.tone]">
         <component :is="icons[i]" :size="15" stroke-width="1.75" />

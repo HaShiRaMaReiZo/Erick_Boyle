@@ -19,7 +19,7 @@ function openProject(project: Project) {
 
 <template>
   <section class="featured section-pad">
-    <div class="featured__head" v-reveal="'fade'">
+    <div class="featured__head" v-reveal="'up'">
       <h2>Featured Projects</h2>
       <button type="button" class="featured__link" @click="emit('navigate', 'projects')">
         View All Projects

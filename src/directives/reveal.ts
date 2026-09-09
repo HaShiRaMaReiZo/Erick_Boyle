@@ -24,8 +24,9 @@ export const vReveal: Directive<HTMLElement, string | undefined> = {
       },
       {
         root: getRoot(),
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.1,
+        // Keep items hidden until they enter the upper ~3/4 of the scroll view
+        rootMargin: '0px 0px -28% 0px',
+        threshold: 0.12,
       },
     )
 

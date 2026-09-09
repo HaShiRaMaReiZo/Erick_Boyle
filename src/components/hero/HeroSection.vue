@@ -10,6 +10,15 @@ const emit = defineEmits<{
 
 <template>
   <section id="home" class="hero">
+    <button
+      type="button"
+      class="hero__lets-talk float-y"
+      @click="emit('navigate', 'contact')"
+    >
+      <span class="pulse-dot" aria-hidden="true" />
+      Let's Talk
+    </button>
+
     <div class="hero__stage">
       <div class="hero__copy">
         <div class="hero__badge hero-enter">
@@ -26,16 +35,12 @@ const emit = defineEmits<{
           {{ portfolio.tagline }}
         </p>
 
-        <p class="hero__focus hero-enter hero-enter--delay-2">
-          {{ portfolio.focusLine }}
-        </p>
-
         <div class="hero__actions hero-enter hero-enter--delay-3">
           <button type="button" class="btn-primary" @click="emit('navigate', 'projects')">
             View My Work
           </button>
-          <a class="btn-outline hero__cv" :href="portfolio.cvUrl" download>
-            <ArrowDownToLine :size="16" />
+          <a class="btn-outline" :href="portfolio.cvUrl" download>
+            <ArrowDownToLine :size="18" />
             Resume
           </a>
         </div>
@@ -44,7 +49,8 @@ const emit = defineEmits<{
       <div class="hero__visual hero-enter hero-enter--delay-4">
         <div
           v-if="portfolio.available"
-          class="hero__available"
+          class="hero__available float-y"
+          style="animation-delay: 0.5s"
         >
           <span class="pulse-dot" aria-hidden="true" />
           <span>{{ portfolio.availableLabel }}</span>
@@ -71,6 +77,31 @@ const emit = defineEmits<{
   flex-direction: column;
   justify-content: center;
   overflow: visible;
+}
+
+.hero__lets-talk {
+  position: absolute;
+  top: clamp(0.75rem, 1.5vh, 1.25rem);
+  right: clamp(1rem, 2vw, 1.75rem);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 18, 0.78);
+  backdrop-filter: blur(14px);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease;
+}
+
+.hero__lets-talk:hover {
+  border-color: rgba(34, 197, 94, 0.45);
+  color: var(--text);
 }
 
 .hero__stage {
@@ -136,18 +167,11 @@ const emit = defineEmits<{
 }
 
 .hero__tagline {
-  max-width: 26rem;
-  color: var(--text);
-  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
-  font-weight: 500;
-  line-height: 1.45;
-  margin-bottom: 0.55rem;
-}
-
-.hero__focus {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-  letter-spacing: 0.02em;
+  max-width: 34rem;
+  color: var(--text-muted);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.65;
   margin-bottom: clamp(1.35rem, 2.6vh, 1.85rem);
 }
 
@@ -155,24 +179,7 @@ const emit = defineEmits<{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.85rem;
-}
-
-.hero__cv {
-  padding: 0.72rem 1.25rem;
-  font-size: 0.88rem;
-  font-weight: 500;
-  border-color: rgba(255, 255, 255, 0.12);
-  background: transparent;
-  color: var(--text-muted);
-  box-shadow: none;
-}
-
-.hero__cv:hover {
-  color: var(--text);
-  border-color: rgba(168, 85, 247, 0.35);
-  background: rgba(168, 85, 247, 0.08);
-  transform: none;
+  gap: 0.75rem;
 }
 
 .hero__visual {
@@ -241,6 +248,11 @@ const emit = defineEmits<{
     padding: 1.5rem 1.25rem 0.5rem;
   }
 
+  .hero__lets-talk {
+    top: 1rem;
+    right: 1.25rem;
+  }
+
   .hero__stage {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -286,7 +298,7 @@ const emit = defineEmits<{
   }
 
   .hero__actions .btn-primary,
-  .hero__actions .hero__cv {
+  .hero__actions .btn-outline {
     width: 100%;
     justify-content: center;
   }
