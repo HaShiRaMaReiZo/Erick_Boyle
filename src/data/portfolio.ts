@@ -36,7 +36,7 @@ export const portfolio = {
   available: true,
   availableLabel: 'Available for freelance work',
   avatar: '/images/avatar.jpg',
-  cvUrl: '/cv.pdf',
+  cvUrl: '/Zwe_Mhan_Htet_Resume.pdf',
   videoSrc: '/videos/hero-loop.orig.mp4',
   social: {
     github: 'https://github.com/HaShiRaMaReiZo',

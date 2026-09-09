@@ -285,9 +285,12 @@ function onNav(id: string) {
     top: 0;
     left: 0;
     bottom: 0;
+    width: min(288px, 86vw);
     border-radius: 0 20px 20px 0;
     transform: translateX(-105%);
     box-shadow: 20px 0 60px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem 1rem 1.25rem;
+    padding-top: calc(1.5rem + env(safe-area-inset-top, 0px));
   }
 
   .sidebar--open {
@@ -296,6 +299,15 @@ function onNav(id: string) {
 
   .sidebar__close {
     display: grid;
+  }
+
+  .sidebar__avatar {
+    width: 84px;
+    height: 84px;
+  }
+
+  .sidebar__name {
+    font-size: 0.95rem;
   }
 }
 </style>

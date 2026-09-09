@@ -177,9 +177,15 @@ video {
   padding: 3.25rem 2rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .section-pad {
-    padding: 2.75rem 1.25rem;
+    padding: 2.35rem 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-pad {
+    padding: 2rem 1rem;
   }
 }
 

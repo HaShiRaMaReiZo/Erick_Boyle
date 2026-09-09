@@ -121,6 +121,26 @@ function closeProject() {
 }
 
 @media (max-width: 640px) {
+  .projects__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.5rem;
+    margin-inline: -0.15rem;
+    padding-bottom: 0.35rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .projects__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projects__filter {
+    flex-shrink: 0;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
   .projects__grid {
     grid-template-columns: 1fr;
   }

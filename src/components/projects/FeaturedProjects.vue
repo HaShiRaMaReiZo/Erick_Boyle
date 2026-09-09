@@ -88,9 +88,28 @@ function openProject(project: Project) {
   }
 }
 
+@media (max-width: 1023px) {
+  .featured {
+    padding-top: 0.5rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .featured__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+  }
+
+  .featured__link {
+    font-size: 0.84rem;
+  }
+}
+
 @media (max-width: 640px) {
   .featured__grid {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
 }
 </style>

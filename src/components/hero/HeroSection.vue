@@ -47,15 +47,6 @@ const emit = defineEmits<{
       </div>
 
       <div class="hero__visual hero-enter hero-enter--delay-4">
-        <div
-          v-if="portfolio.available"
-          class="hero__available float-y"
-          style="animation-delay: 0.5s"
-        >
-          <span class="pulse-dot" aria-hidden="true" />
-          <span>{{ portfolio.availableLabel }}</span>
-        </div>
-
         <HeroVideo :src="portfolio.videoSrc" />
 
         <a href="#about" class="hero__scroll" aria-label="Scroll to about">
@@ -63,6 +54,15 @@ const emit = defineEmits<{
             <span class="hero__wheel scroll-wheel" />
           </span>
         </a>
+      </div>
+
+      <div
+        v-if="portfolio.available"
+        class="hero__available float-y"
+        style="animation-delay: 0.5s"
+      >
+        <span class="pulse-dot" aria-hidden="true" />
+        <span>{{ portfolio.availableLabel }}</span>
       </div>
     </div>
   </section>
@@ -105,6 +105,7 @@ const emit = defineEmits<{
 }
 
 .hero__stage {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.2fr);
   gap: clamp(0.75rem, 2vw, 1.75rem);
@@ -191,9 +192,9 @@ const emit = defineEmits<{
 
 .hero__available {
   position: absolute;
-  top: 40%;
-  right: 2%;
-  z-index: 4;
+  top: 42%;
+  right: clamp(1.5rem, 4vw, 3.5rem);
+  z-index: 6;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -242,54 +243,148 @@ const emit = defineEmits<{
   background: rgba(255, 255, 255, 0.65);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1023px) {
   .hero {
+    --mobile-bar-h: calc(3.65rem + env(safe-area-inset-top, 0px));
     min-height: auto;
-    padding: 1.5rem 1.25rem 0.5rem;
+    padding: 0;
+    overflow: hidden;
+    /* Pull hero (and video) up under the sticky app bar */
+    margin-top: calc(var(--mobile-bar-h) * -1);
   }
 
   .hero__lets-talk {
-    top: 1rem;
-    right: 1.25rem;
+    display: none;
   }
 
   .hero__stage {
+    position: relative;
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 0;
+    align-items: stretch;
+    min-height: calc(min(82svh, 680px) + var(--mobile-bar-h));
+    isolation: isolate;
+  }
+
+  .hero__visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    min-height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 7, 26, 0.2) 0%,
+        rgba(7, 7, 26, 0.35) 12%,
+        rgba(7, 7, 26, 0.62) 45%,
+        rgba(7, 7, 26, 0.88) 100%
+      ),
+      radial-gradient(ellipse at 70% 40%, rgba(124, 58, 237, 0.18), transparent 55%);
+    pointer-events: none;
   }
 
   .hero__copy {
+    position: relative;
+    z-index: 4;
+    order: 0;
     max-width: none;
-    order: 1;
+    padding: calc(var(--mobile-bar-h) + 1.15rem) 1.15rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: calc(min(82svh, 680px) + var(--mobile-bar-h));
+    pointer-events: none;
+  }
+
+  .hero__copy > * {
+    pointer-events: auto;
+  }
+
+  .hero__badge {
+    max-width: max-content;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    padding: 0.36rem 0.7rem;
+    white-space: normal;
+    line-height: 1.35;
+    background: rgba(8, 8, 18, 0.72);
   }
 
   .hero__title {
     flex-direction: column;
+    font-size: clamp(2.1rem, 9vw, 2.75rem);
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
   }
 
   .hero__greeting {
-    font-size: 0.58em;
+    font-size: 0.55em;
   }
 
-  .hero__visual {
-    min-height: 360px;
-    order: 0;
+  .hero__tagline {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    color: rgba(226, 226, 240, 0.92);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .hero__actions .btn-primary,
+  .hero__actions .btn-outline {
+    flex: 1 1 auto;
+    min-width: 140px;
+    justify-content: center;
+    padding: 0.75rem 1.15rem;
+    font-size: 0.88rem;
+  }
+
+  .hero__actions .btn-outline {
+    background: rgba(8, 8, 16, 0.72);
+    backdrop-filter: blur(10px);
   }
 
   .hero__available {
-    right: 0.5rem;
-    top: auto;
-    bottom: 3.5rem;
+    top: calc(var(--mobile-bar-h) + 0.65rem);
+    right: 1rem;
+    bottom: auto;
+    z-index: 5;
+    max-width: 8.5rem;
+    font-size: 0.68rem;
+    padding: 0.4rem 0.65rem;
+    pointer-events: auto;
+  }
+
+  .hero__scroll {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
-  .hero__title {
-    font-size: 2.2rem;
+  .hero {
+    --mobile-bar-h: calc(3.55rem + env(safe-area-inset-top, 0px));
   }
 
-  .hero__visual {
-    min-height: 280px;
+  .hero__stage,
+  .hero__copy {
+    min-height: calc(min(76svh, 620px) + var(--mobile-bar-h));
+  }
+
+  .hero__copy {
+    padding: calc(var(--mobile-bar-h) + 0.95rem) 1rem 1.75rem;
   }
 
   .hero__actions {
@@ -300,7 +395,13 @@ const emit = defineEmits<{
   .hero__actions .btn-primary,
   .hero__actions .btn-outline {
     width: 100%;
-    justify-content: center;
+    min-width: 0;
+  }
+
+  .hero__available {
+    max-width: 7.5rem;
+    top: calc(var(--mobile-bar-h) + 0.55rem);
+    right: 0.85rem;
   }
 }
 </style>

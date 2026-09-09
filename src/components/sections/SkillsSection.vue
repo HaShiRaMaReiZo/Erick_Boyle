@@ -87,6 +87,11 @@ import { portfolio } from '@/data/portfolio'
 @media (max-width: 720px) {
   .skills__grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .skill {
+    padding: 0.95rem 1.05rem;
   }
 }
 </style>

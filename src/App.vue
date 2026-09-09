@@ -120,9 +120,21 @@ onUnmounted(() => {
         <Menu :size="20" />
       </button>
       <div class="mobile-bar__brand">
-        <span class="mobile-bar__logo">{{ portfolio.initials }}</span>
-        <span>{{ portfolio.name }}</span>
+        <img
+          class="mobile-bar__logo"
+          :src="portfolio.avatar"
+          :alt="portfolio.name"
+        />
+        <span class="mobile-bar__name">{{ portfolio.name }}</span>
       </div>
+      <button
+        type="button"
+        class="mobile-bar__talk"
+        @click="navigate('contact')"
+      >
+        <span class="pulse-dot" aria-hidden="true" />
+        Let's Talk
+      </button>
     </header>
 
     <main ref="mainEl" class="main-scroll">
@@ -160,11 +172,13 @@ onUnmounted(() => {
   top: 0;
   z-index: 30;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--border);
-  background: rgba(8, 8, 20, 0.88);
+  gap: 0.65rem;
+  padding: 0.7rem 0.85rem;
+  padding-top: calc(0.7rem + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(8, 8, 20, 0.42);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .mobile-bar__menu {
@@ -176,26 +190,50 @@ onUnmounted(() => {
   color: var(--text);
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
 
 .mobile-bar__brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.55rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.mobile-bar__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mobile-bar__logo {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-size: 0.75rem;
-  font-family: var(--font-display);
-  color: white;
-  background: var(--gradient-btn);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 30%;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+  background: var(--surface-solid);
+}
+
+.mobile-bar__talk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 18, 0.85);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .main-scroll {
@@ -217,10 +255,21 @@ onUnmounted(() => {
     margin-left: 0;
     max-height: none;
     overflow: visible;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   .backdrop.lg-hidden {
     display: block;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-bar__name {
+    display: none;
+  }
+
+  .mobile-bar__talk {
+    padding: 0.42rem 0.65rem;
   }
 }
 

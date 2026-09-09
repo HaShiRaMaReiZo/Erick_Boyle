@@ -104,5 +104,13 @@ import { portfolio } from '@/data/portfolio'
   .about__grid {
     grid-template-columns: 1fr;
   }
+
+  .about__story {
+    padding: 1.35rem 1.2rem;
+  }
+
+  .about__card:hover {
+    transform: none;
+  }
 }
 </style>

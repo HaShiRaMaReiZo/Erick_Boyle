@@ -356,5 +356,18 @@ async function onSubmit() {
   .contact__grid {
     grid-template-columns: 1fr;
   }
+
+  .contact__form {
+    padding: 1.35rem 1.2rem;
+  }
+
+  .contact__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact__info {
+    padding: 1.25rem;
+  }
 }
 </style>

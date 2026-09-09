@@ -105,7 +105,16 @@ const toneClass: Record<string, string> = {
 @media (max-width: 1100px) {
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-inline: 1.25rem;
+    gap: 0.65rem;
+    margin: 0.65rem 1.1rem 0.85rem;
+    padding: 0.75rem;
+  }
+
+  .stat {
+    justify-content: flex-start;
+    padding: 0.55rem 0.65rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
   }
 
   .stat--divider {
@@ -113,17 +122,29 @@ const toneClass: Record<string, string> = {
   }
 
   .stat:nth-child(even) {
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: none;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .stats {
-    grid-template-columns: 1fr;
+    margin-inline: 1rem;
+    gap: 0.55rem;
+    padding: 0.65rem;
   }
 
-  .stat:nth-child(even) {
-    border-left: none;
+  .stat {
+    gap: 0.55rem;
+    padding: 0.6rem 0.7rem;
+  }
+
+  .stat__value {
+    font-size: 1.05rem;
+  }
+
+  .stat__label {
+    font-size: 0.68rem;
+    line-height: 1.25;
   }
 }
 </style>

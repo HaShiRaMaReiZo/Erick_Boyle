@@ -100,31 +100,27 @@ function onError() {
   aspect-ratio: 960 / 820;
   max-height: none;
   margin-top: 0;
-  /*
-    Soft feather on all edges, including a stronger top blur
-    so the video's hard black top band melts into the page background.
-  */
   -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
     linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(0, 0, 0, 0.25) 3%,
-      rgba(0, 0, 0, 0.7) 8%,
-      #000 14%,
-      #000 86%,
+      rgba(0, 0, 0, 0.35) 2%,
+      rgba(0, 0, 0, 0.75) 5%,
+      #000 10%,
+      #000 88%,
       transparent 100%
     );
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
     linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(0, 0, 0, 0.25) 3%,
-      rgba(0, 0, 0, 0.7) 8%,
-      #000 14%,
-      #000 86%,
+      rgba(0, 0, 0, 0.35) 2%,
+      rgba(0, 0, 0, 0.75) 5%,
+      #000 10%,
+      #000 88%,
       transparent 100%
     );
   mask-composite: intersect;
@@ -138,27 +134,27 @@ function onError() {
   object-position: center top;
 }
 
-/* Extra soft blur wash across the top edge */
+/* Moderate top blend — hides letterbox without crushing the ring */
 .hero-video__frame::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 22%;
+  height: 18%;
   pointer-events: none;
   z-index: 2;
   background: linear-gradient(
     to bottom,
-    rgba(7, 7, 26, 0.92) 0%,
-    rgba(7, 7, 26, 0.55) 28%,
-    rgba(7, 7, 26, 0.18) 62%,
+    rgba(7, 7, 26, 0.82) 0%,
+    rgba(7, 7, 26, 0.4) 40%,
+    rgba(7, 7, 26, 0.12) 70%,
     transparent 100%
   );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
 }
 
 .hero-video__debris {
@@ -202,53 +198,50 @@ function onError() {
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1023px) {
   .hero-video {
-    min-height: 380px;
-  }
-
-  .hero-video__frame {
+    position: absolute;
+    inset: 0;
+    min-height: 100%;
+    height: 100%;
     width: 100%;
-    margin-top: 0;
+    overflow: hidden;
+    align-items: stretch;
+    justify-content: stretch;
   }
-}
 
-@media (max-width: 640px) {
-  .hero-video {
-    min-height: 300px;
+  .hero-video__glow {
+    top: 45%;
+    width: 120%;
+    height: 120%;
+    opacity: 0.7;
   }
 
   .hero-video__frame {
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
-      linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0, 0, 0, 0.4) 5%,
-        #000 14%,
-        #000 90%,
-        transparent 100%
-      );
-    mask-image:
-      linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
-      linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0, 0, 0, 0.4) 5%,
-        #000 14%,
-        #000 90%,
-        transparent 100%
-      );
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    margin: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .hero-video__frame::after {
-    height: 16%;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    display: none;
   }
 
-  .hero-video__debris--a {
-    width: 36px;
+  .hero-video__media {
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.15) translateY(-2%);
+    transform-origin: center top;
+  }
+
+  .hero-video__debris {
+    display: none;
   }
 }
 </style>
