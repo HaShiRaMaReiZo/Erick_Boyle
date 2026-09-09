@@ -42,7 +42,7 @@ Production: set the same three keys in the Vercel project **Environment Variable
 2. [vercel.com/new](https://vercel.com/new) → import the repo.
 3. Framework preset: **Vite** (or leave auto-detect). Build: `npm run build`, Output: `dist`.
 4. Add the three `VITE_EMAILJS_*` environment variables → Redeploy.
-5. Optional: upload `public/cv.pdf` before deploy so **Download CV** works.
+5. Optional: confirm `public/Zwe_Mhan_Htet_Resume.pdf` is present so **Resume** downloads work.
 
 `vercel.json` is included for SPA rewrites.
 
@@ -52,6 +52,6 @@ Production: set the same three keys in the Vercel project **Environment Variable
 |------|---------|
 | `public/videos/hero-loop.orig.mp4` | Hero looping video |
 | `public/images/avatar.jpg` | Sidebar profile photo |
-| `public/cv.pdf` | Download CV target (add this file) |
+| `public/Zwe_Mhan_Htet_Resume.pdf` | Resume download (`portfolio.cvUrl`) |
 
 Edit copy, links, stats, and projects in [`src/data/portfolio.ts`](src/data/portfolio.ts).

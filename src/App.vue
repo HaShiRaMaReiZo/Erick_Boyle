@@ -125,7 +125,10 @@ onUnmounted(() => {
           :src="portfolio.avatar"
           :alt="portfolio.name"
         />
-        <span class="mobile-bar__name">{{ portfolio.name }}</span>
+        <div class="mobile-bar__titles">
+          <span class="mobile-bar__name">{{ portfolio.name }}</span>
+          <span class="mobile-bar__official">{{ portfolio.officialName }}</span>
+        </div>
       </div>
       <button
         type="button"
@@ -203,10 +206,26 @@ onUnmounted(() => {
   flex: 1;
 }
 
+.mobile-bar__titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.15;
+}
+
 .mobile-bar__name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.mobile-bar__official {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.68rem;
+  font-weight: 450;
+  color: var(--text-dim);
 }
 
 .mobile-bar__logo {
@@ -264,7 +283,7 @@ onUnmounted(() => {
 }
 
 @media (max-width: 380px) {
-  .mobile-bar__name {
+  .mobile-bar__official {
     display: none;
   }
 

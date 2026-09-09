@@ -31,6 +31,10 @@ const emit = defineEmits<{
           <span class="gradient-text hero__name">{{ portfolio.name }}</span>
         </h1>
 
+        <p class="hero__official hero-enter hero-enter--delay-1">
+          Official name · {{ portfolio.officialName }}
+        </p>
+
         <p class="hero__tagline hero-enter hero-enter--delay-2">
           {{ portfolio.tagline }}
         </p>
@@ -165,6 +169,13 @@ const emit = defineEmits<{
 .hero__name {
   display: inline;
   filter: drop-shadow(0 0 28px rgba(168, 85, 247, 0.35));
+}
+
+.hero__official {
+  margin: -0.15rem 0 0.85rem;
+  color: var(--text-dim);
+  font-size: 0.84rem;
+  letter-spacing: 0.02em;
 }
 
 .hero__tagline {

@@ -29,6 +29,7 @@ export type NavItem = {
 export const portfolio = {
   initials: 'EB',
   name: 'Erick Boyle',
+  officialName: 'Zwe Mhan Htet',
   brandName: 'Erick Boyle',
   role: 'Full Stack & Mobile App Developer',
   tagline:
@@ -56,7 +57,7 @@ export const portfolio = {
     subtitle: 'Get to know more about my background and expertise',
     storyTitle: 'My Story',
     story: [
-      "I'm a passionate full-stack developer with over 2 years of experience in creating digital solutions that make a difference. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
+      "I'm Erick Boyle (official name Zwe Mhan Htet), a passionate full-stack developer with over 3 years of experience in creating digital solutions that make a difference. My journey began with a curiosity about how websites work, and it has evolved into a deep passion for crafting exceptional user experiences.",
       'I specialize in modern web technologies and have a strong foundation in both frontend and backend development. I love turning complex problems into simple, beautiful, and intuitive solutions. Passionate about creating exceptional digital experiences through innovative web development and thoughtful design.',
     ],
     highlights: [
@@ -273,18 +274,18 @@ export const portfolio = {
   ] satisfies Project[],
   experience: [
     {
-      role: 'Full Stack Developer',
-      company: 'Freelance / Client Projects',
-      period: '2023 — Present',
+      role: 'Full-Stack & Mobile Developer',
+      company: 'Rent 2 Own (Full-Time) & Freelance',
+      period: '2025 — Sep 2026',
       description:
-        'Building web dashboards, Laravel APIs, and Flutter apps for clients across delivery, app distribution, and business tools.',
+        'Managed full-time development at Rent 2 Own with Flutter, React Native, Laravel, and Vue, while delivering concurrent freelance full-stack web apps, mobile builds, and backend updates.',
     },
     {
-      role: 'Mobile & Web Developer',
-      company: 'Personal & Learning Projects',
-      period: '2022 — 2023',
+      role: 'Freelance Developer & IT Student',
+      company: 'Client & Personal Projects',
+      period: '2022 — 2025',
       description:
-        'Focused on Flutter, React Native, and modern frontend foundations while shipping portfolio and practice applications.',
+        'Completed IT training while shipping portfolio projects, app updates, and backend services for clients using Laravel, Flutter, and modern JavaScript frameworks.',
     },
   ],
   testimonials: [

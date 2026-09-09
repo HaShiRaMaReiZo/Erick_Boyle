@@ -78,6 +78,7 @@ function onNav(id: string) {
         <img :src="portfolio.avatar" :alt="portfolio.name" @error="onAvatarError" />
       </div>
       <p class="sidebar__name">{{ portfolio.name }}</p>
+      <p class="sidebar__official">{{ portfolio.officialName }}</p>
     </div>
 
     <nav class="sidebar__nav">
@@ -168,7 +169,7 @@ function onNav(id: string) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.45rem;
   margin-bottom: 1.35rem;
 }
 
@@ -180,6 +181,15 @@ function onNav(id: string) {
   letter-spacing: -0.02em;
   text-align: center;
   color: var(--text);
+  line-height: 1.2;
+}
+
+.sidebar__official {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 0.01em;
   line-height: 1.2;
 }
 
